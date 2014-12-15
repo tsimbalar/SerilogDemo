@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog.Formatting.Json;
+using Serilog.Formatting.Raw;
+using Serilog.Sinks.IOFile;
 
 namespace SerilogDemo.BasicConsole
 {
@@ -14,12 +17,16 @@ namespace SerilogDemo.BasicConsole
             Console.WriteLine("Starting....");
 
             // configuration Serilog, une fois pour toute ...
-            var logConfig = new LoggerConfiguration()
+            var defaultLogger = new LoggerConfiguration()
                             //.MinimumLevel.Debug() // make debug level visible .. default is information
-                            .WriteTo.ColoredConsole();
+                            .WriteTo.ColoredConsole()
+                            .WriteTo.RollingFile("C:\\Temp\\Logs\\app-{Date}.txt")
+                            .WriteTo.Sink(new FileSink("C:\\Temp\\Logs\\dump.txt",  new RawFormatter(), null))
+                            .CreateLogger()
+                            ;
 
             // Source context to add information about source in logged events (SourceContext)
-            var classLogger = logConfig.CreateLogger().ForContext<Program>();
+            var classLogger = defaultLogger.ForContext<Program>();
 
 
             classLogger.Information("Doing stuff with the thing");
