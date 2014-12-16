@@ -48,6 +48,7 @@ namespace SerilogDemo.BasicConsole
                 //.WriteTo.Sink(new FileSink("C:\\Temp\\Logs\\dump.txt",  new RawFormatter(), null))
                 //            .WriteTo.NLog()
                 //            .WriteTo.Seq("http://localhost:5341", restrictedToMinimumLevel:LogEventLevel.Information)
+                //            .WriteTo.MSSqlServer(@"Server=(localdb)\v11.0;Database=Logs;Trusted_Connection=True;", "SeriLogs")
             #endregion
                             .CreateLogger()
                             ;
