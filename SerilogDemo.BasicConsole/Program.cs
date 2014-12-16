@@ -39,8 +39,8 @@ namespace SerilogDemo.BasicConsole
             // a destination is a sink 
             var logger = new LoggerConfiguration()
             #region extra config
-                .Enrich.With<VersionEnricher>()
-                .MinimumLevel.Debug() // make debug level visible .. default is information
+                //.Enrich.With<VersionEnricher>()
+                //.MinimumLevel.Debug() // make debug level visible .. default is information
             #endregion
                             .WriteTo.ColoredConsole()
             #region other sinks
