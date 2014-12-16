@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog.Formatting.Raw;
@@ -21,11 +22,13 @@ namespace SerilogDemo.BasicConsole
             Console.WriteLine("Starting....");
 
             // configuration Serilog, une fois pour toute ...
+            // a destination is a sink 
             var logger = new LoggerConfiguration()
+                            //.Enrich.With<VersionEnricher>()
                             //.MinimumLevel.Debug() // make debug level visible .. default is information
                             .WriteTo.ColoredConsole()
                             //.WriteTo.RollingFile("C:\\Temp\\Logs\\app-{Date}.txt", restrictedToMinimumLevel:LogEventLevel.Warning)
-                            //.WriteTo.Sink(new FileSink("C:\\Temp\\Logs\\dump.txt",  new RawFormatter(), null))
+                            .WriteTo.Sink(new FileSink("C:\\Temp\\Logs\\dump.txt",  new RawFormatter(), null))
                             .CreateLogger()
                             ;
 
@@ -81,4 +84,13 @@ namespace SerilogDemo.BasicConsole
             logger.Information("was asked to stop !");
         }
     }
+
+    public class VersionEnricher : ILogEventEnricher
+    {
+        public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
+        {
+            logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("AppVersion", typeof(Program).Assembly.GetName().Version));
+        }
+    }
+
 }
