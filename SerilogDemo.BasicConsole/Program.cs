@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog.Formatting.Raw;
 using Serilog.Sinks.IOFile;
@@ -23,7 +24,7 @@ namespace SerilogDemo.BasicConsole
             var logger = new LoggerConfiguration()
                             //.MinimumLevel.Debug() // make debug level visible .. default is information
                             .WriteTo.ColoredConsole()
-                            //.WriteTo.RollingFile("C:\\Temp\\Logs\\app-{Date}.txt")
+                            //.WriteTo.RollingFile("C:\\Temp\\Logs\\app-{Date}.txt", restrictedToMinimumLevel:LogEventLevel.Warning)
                             //.WriteTo.Sink(new FileSink("C:\\Temp\\Logs\\dump.txt",  new RawFormatter(), null))
                             .CreateLogger()
                             ;
