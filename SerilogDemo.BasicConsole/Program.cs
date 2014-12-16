@@ -1,4 +1,7 @@
 ﻿using System.Configuration;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -17,18 +20,27 @@ namespace SerilogDemo.BasicConsole
     {
         static void Main(string[] args)
         {
+            //// NLog config
+            //var consoleTarget = new ColoredConsoleTarget();
+            //var nlogConfig = new LoggingConfiguration();
+            //nlogConfig.AddTarget("console", consoleTarget);
+            //nlogConfig.LoggingRules.Add(new LoggingRule("*", minLevel: LogLevel.Debug, target: consoleTarget));
+            //LogManager.Configuration = nlogConfig;
+
             // redirect internal Serilog errors to output so we can diagnose the issues
             //Serilog.Debugging.SelfLog.Out = Console.Error;
+
             Console.WriteLine("Starting....");
 
             // configuration Serilog, une fois pour toute ...
             // a destination is a sink 
             var logger = new LoggerConfiguration()
-                            //.Enrich.With<VersionEnricher>()
-                            //.MinimumLevel.Debug() // make debug level visible .. default is information
+                //.Enrich.With<VersionEnricher>()
+                //.MinimumLevel.Debug() // make debug level visible .. default is information
                             .WriteTo.ColoredConsole()
-                            //.WriteTo.RollingFile("C:\\Temp\\Logs\\app-{Date}.txt", restrictedToMinimumLevel:LogEventLevel.Warning)
-                            .WriteTo.Sink(new FileSink("C:\\Temp\\Logs\\dump.txt",  new RawFormatter(), null))
+                //.WriteTo.RollingFile("C:\\Temp\\Logs\\app-{Date}.txt", restrictedToMinimumLevel:LogEventLevel.Warning)
+                //.WriteTo.Sink(new FileSink("C:\\Temp\\Logs\\dump.txt",  new RawFormatter(), null))
+                //            .WriteTo.NLog()
                             .CreateLogger()
                             ;
 
@@ -38,6 +50,8 @@ namespace SerilogDemo.BasicConsole
 
             logger.Information("Doing stuff with the thing");
             logger.Warning("Be careful, the foo has some baz !");
+
+            logger.Information("with format string {0}, and {1}", "item1", 2);
 
             logger.Debug("if you are a developper, you may want to know that the answer is 42");
             logger.Verbose("you would usually not see the verbose output, but who knows ?");
