@@ -2,6 +2,7 @@
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using Raven.Client.Document;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,15 @@ namespace SerilogDemo.BasicConsole
             //LogManager.Configuration = nlogConfig;
             #endregion
 
+            #region RavenDB
+            //var documentStore = new DocumentStore
+            //{
+            //    Url = "http://localhost:8080",
+            //    DefaultDatabase = "Logs"
+            //};
+            //documentStore.Initialize();
+            #endregion
+
             #region Debugging
             // redirect internal Serilog errors to output so we can diagnose the issues
             //Serilog.Debugging.SelfLog.Out = Console.Error;
@@ -49,6 +59,7 @@ namespace SerilogDemo.BasicConsole
                 //            .WriteTo.NLog()
                 //            .WriteTo.Seq("http://localhost:5341", restrictedToMinimumLevel:LogEventLevel.Information)
                 //            .WriteTo.MSSqlServer(@"Server=(localdb)\v11.0;Database=Logs;Trusted_Connection=True;", "SeriLogs")
+                //.WriteTo.RavenDB(documentStore)
             #endregion
                             .CreateLogger()
                             ;
@@ -101,6 +112,7 @@ namespace SerilogDemo.BasicConsole
 
             //// force stringification with "$" operator when wanted (example : IEnumerable)
             //logger.Information("Days of the week stringified : {$DaysOfTheWeek}", daysOfTheWeek.ToList());
+            
             #endregion
 
             Console.WriteLine("Done .... press any key to continue ...");

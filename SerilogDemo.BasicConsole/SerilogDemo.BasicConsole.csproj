@@ -35,6 +35,12 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.0.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\packages\RavenDB.Client.2.5.2750\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\packages\RavenDB.Client.2.5.2750\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog">
       <HintPath>..\packages\Serilog.1.4.76\lib\net45\Serilog.dll</HintPath>
     </Reference>
@@ -47,10 +53,14 @@
     <Reference Include="Serilog.Sinks.NLog">
       <HintPath>..\packages\Serilog.Sinks.NLog.1.4.76\lib\net45\Serilog.Sinks.NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog.Sinks.RavenDB">
+      <HintPath>..\packages\Serilog.Sinks.RavenDB.1.4.76\lib\net45\Serilog.Sinks.RavenDB.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog.Sinks.Seq">
       <HintPath>..\packages\Serilog.Sinks.Seq.1.4.76\lib\net45\Serilog.Sinks.Seq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
