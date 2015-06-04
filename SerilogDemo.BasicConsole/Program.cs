@@ -50,6 +50,9 @@ namespace SerilogDemo.BasicConsole
             var logger = new LoggerConfiguration()
             #region extra config
                 //.Enrich.With<VersionEnricher>()
+                //.Enrich.WithProperty("AppName", "MyApp")
+                //.Enrich.WithProperty("AppComponent", "ConsoleApp")
+                //.Enrich.WithProperty("Environment", "Dev")
                 //.MinimumLevel.Debug() // make debug level visible .. default is information
             #endregion
                             .WriteTo.ColoredConsole()
